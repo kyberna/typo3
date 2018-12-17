@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+if [ -z "$SSHPWD" ];
+then
+	echo "root:$SSHPWD" | chpasswd
+fi
+
+# first arg is `-f` or `--some-option`
+if [ "${1#-}" != "$1" ]; then
+	set -- apache2-foreground "$@"
+fi
+
+exec "$@"
