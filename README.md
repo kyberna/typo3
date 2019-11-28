@@ -1,2 +1,3 @@
-# typo3
-Typo3 Docker für kyberna.com
+# TYPO3
+
+TYPO3 Docker image for kyberna.com

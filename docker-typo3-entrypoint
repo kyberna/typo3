@@ -1,15 +1,21 @@
 #!/bin/sh
 set -e
 
-if [ -n "$SSHPWD" ];
-then
-        echo "root:$SSHPWD" | chpasswd
+: ${TYPO3_CONTEXT=""}
+: ${SSHPWD=""}
+: ${SSHENABLED=""}
+
+if [ "$SSHPWD" != "" ]; then
+    echo "root:$SSHPWD" | chpasswd
 fi
 
-if [ -n "$SSHENABLED" ];
-then
-        echo "Starting sshd"
-        /usr/sbin/sshd
+if [ "$SSHENABLED" != "" ]; then
+    echo "Starting sshd"
+    /usr/sbin/sshd
+fi
+
+if [ "$TYPO3_CONTEXT" != "" ]; then
+    echo "export TYPO3_CONTEXT=$TYPO3_CONTEXT" >> ~/.profile;
 fi
 
 # first arg is `-f` or `--some-option`
